@@ -1,0 +1,108 @@
+﻿@import "tailwindcss";
+
+:root {
+  --background: #f6efe8;
+  --surface: rgba(255, 251, 247, 0.88);
+  --surface-strong: #f1e5da;
+  --foreground: #2d211b;
+  --muted: #70594b;
+  --accent: #a56f53;
+  --accent-strong: #7f4c31;
+  --border-soft: rgba(117, 85, 64, 0.16);
+  --border-strong: rgba(80, 54, 38, 0.3);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  font-family: var(--font-body), sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.85), transparent 28%),
+    linear-gradient(180deg, #fbf6f1 0%, var(--background) 52%, #f0e4d8 100%);
+  color: var(--foreground);
+}
+
+a,
+button {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+.button-primary {
+  border: 1px solid rgba(67, 37, 22, 0.35);
+  box-shadow: 0 14px 28px rgba(67, 37, 22, 0.22);
+}
+
+.button-primary:hover {
+  box-shadow: 0 18px 34px rgba(67, 37, 22, 0.28);
+}
+
+.image-card {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.08)),
+    linear-gradient(135deg, #ead7ca 0%, #cfad95 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 18px 36px rgba(77, 50, 36, 0.14);
+}
+
+.image-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(24, 15, 10, 0) 55%, rgba(24, 15, 10, 0.1) 100%);
+  pointer-events: none;
+}
+
+.hero-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(214, 184, 158, 0.2), transparent 18%),
+    radial-gradient(circle at 80% 20%, rgba(171, 119, 87, 0.16), transparent 20%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.75), transparent 32%);
+  pointer-events: none;
+}
+
+.cart-bump {
+  animation: cart-bump 520ms ease;
+}
+
+@keyframes cart-bump {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  30% {
+    transform: translateY(-3px) rotate(-8deg) scale(1.08);
+  }
+  60% {
+    transform: translateY(1px) rotate(6deg) scale(1.02);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .image-card img {
+    min-height: 220px;
+  }
+}
