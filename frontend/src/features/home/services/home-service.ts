@@ -43,7 +43,7 @@ export function convertToFeaturedProduct(product: ApiProduct): FeaturedProduct {
   const tonos = categoryTones[product.categoryName] || defaultTones;
 
   // Generar descripción básica si no existe
-  const descripcion = `Hermosa pieza de cerámica ${product.categoryName.toLowerCase()}, elaborada artesanalmente con acabados de alta calidad.`;
+  const descripcion = `Hermosa pieza de cerámica ${(product.categoryName || '').toLowerCase()}, elaborada artesanalmente con acabados de alta calidad.`;
 
   // Determinar etiqueta basada en stock
   let etiqueta = "NUEVO";
@@ -75,11 +75,10 @@ export async function getFeaturedProducts(): Promise<FeaturedProduct[]> {
     // Intentar obtener productos desde el endpoint público de productos
     const products = await apiRequest<ApiProduct[]>("/api/products");
     
-    // Filtrar solo productos activos y obtener los últimos 8 (más recientes)
+    // Filtrar solo productos activos y obtener todos los productos (sin límite)
     const activeProducts = products
       .filter(p => p.status)
-      .sort((a, b) => b.id - a.id) // Ordenar por ID descendente (más recientes primero)
-      .slice(0, 8); // Obtener los últimos 8
+      .sort((a, b) => b.id - a.id); // Ordenar por ID descendente (más recientes primero)
     
     return activeProducts.map(convertToFeaturedProduct);
   } catch (error) {
